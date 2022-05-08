@@ -6,8 +6,8 @@ import SearchBar from "./SearchBar";
 function MainContainer() {
   const [stocks, setStocks] = useState([])
   const [stocksInPortfolio, setStocksInPortfolio] = useState([])
-  const [sortTerm, setSortTerm] = useState("")
-  const [stockFilter, setStockFilter] = useState("")
+  const [sortTerm, setSortTerm] = useState("Alphabetically")
+  const [stockFilter, setStockFilter] = useState("All")
 
   useEffect(() => {
     fetch(`http://localhost:3001/stocks`)
@@ -26,12 +26,20 @@ function MainContainer() {
     console.log(stockToRemove)
   }
 
+  const stocksSorted = [...stocks].sort((stockA, stockB) => {
+    if(sortTerm === "Alphabetically") {
+      return stockA.name.localeCompare(stockB.name)
+    } else {
+      return stockA.price - stockB.price
+    }
+  })
+
   return (
     <div>
-      <SearchBar sortBy={sortTerm} handleSort={setSortTerm} filterBy={stockFilter} handleFilter={setStockFilter}/>
+      <SearchBar sortBy={sortTerm} onSort={setSortTerm} filterBy={stockFilter} onFilter={setStockFilter}/>
       <div className="row">
         <div className="col-8">
-          <StockContainer stocks={stocks} addStock={handleStockAdd}/>
+          <StockContainer stocks={stocksSorted} addStock={handleStockAdd}/>
         </div>
         <div className="col-4">
           <PortfolioContainer stocks={stocksInPortfolio} removeStock={handleRemoveFromPortfolio}/>
