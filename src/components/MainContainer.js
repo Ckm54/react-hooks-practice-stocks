@@ -6,6 +6,8 @@ import SearchBar from "./SearchBar";
 function MainContainer() {
   const [stocks, setStocks] = useState([])
   const [stocksInPortfolio, setStocksInPortfolio] = useState([])
+  const [sortTerm, setSortTerm] = useState("")
+  const [stockFilter, setStockFilter] = useState("")
 
   useEffect(() => {
     fetch(`http://localhost:3001/stocks`)
@@ -20,6 +22,10 @@ function MainContainer() {
     }
   }
 
+  function handleRemoveFromPortfolio(stockToRemove) {
+    console.log(stockToRemove)
+  }
+
   return (
     <div>
       <SearchBar />
@@ -28,7 +34,7 @@ function MainContainer() {
           <StockContainer stocks={stocks} addStock={handleStockAdd}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer />
+          <PortfolioContainer stocks={stocksInPortfolio} removeStock={handleRemoveFromPortfolio}/>
         </div>
       </div>
     </div>
