@@ -23,7 +23,8 @@ function MainContainer() {
   }
 
   function handleRemoveFromPortfolio(stockToRemove) {
-    console.log(stockToRemove)
+    const filteredPortfolio = stocksInPortfolio.filter((stock) => stock.id !== stockToRemove.id)
+    setStocksInPortfolio(filteredPortfolio)
   }
 
   const stocksSorted = [...stocks].sort((stockA, stockB) => {
