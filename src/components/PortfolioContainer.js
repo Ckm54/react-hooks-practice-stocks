@@ -6,6 +6,7 @@ function PortfolioContainer({stocks, removeStock}) {
   return (
     <div>
       <h2>My Portfolio</h2>
+      <p>Click on stock to sell and remove from portfolio</p>
       {
         portfolioItems
       }

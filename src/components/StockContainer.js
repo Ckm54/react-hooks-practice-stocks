@@ -7,6 +7,7 @@ function StockContainer({ stocks, addStock }) {
   return (
     <div>
       <h2>Stocks</h2>
+      <p>Click on stock to buy and add to portfolio</p>
       {stockcard}
     </div>
   );
