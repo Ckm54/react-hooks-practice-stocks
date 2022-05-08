@@ -35,12 +35,20 @@ function MainContainer() {
     }
   })
 
+  const stocksFiltered = stocksSorted.filter((stock) => {
+    if(stockFilter === "All") {
+      return stock
+    }else {
+      return stock.type === stockFilter
+    }
+  })
+
   return (
     <div>
       <SearchBar sortBy={sortTerm} onSort={setSortTerm} filterBy={stockFilter} onFilter={setStockFilter}/>
       <div className="row">
         <div className="col-8">
-          <StockContainer stocks={stocksSorted} addStock={handleStockAdd}/>
+          <StockContainer stocks={stocksFiltered} addStock={handleStockAdd}/>
         </div>
         <div className="col-4">
           <PortfolioContainer stocks={stocksInPortfolio} removeStock={handleRemoveFromPortfolio}/>
