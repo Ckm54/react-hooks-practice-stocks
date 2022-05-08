@@ -28,7 +28,7 @@ function MainContainer() {
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar sortBy={sortTerm} handleSort={setSortTerm} filterBy={stockFilter} handleFilter={setStockFilter}/>
       <div className="row">
         <div className="col-8">
           <StockContainer stocks={stocks} addStock={handleStockAdd}/>
